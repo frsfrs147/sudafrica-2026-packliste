@@ -10,13 +10,13 @@
   "theme_color": "#9B3E2B",
   "icons": [
     {
-      "src": "./icon-sudafica-192.png",
+      "src": "./icon-sudafrica-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-sudafica-512.png",
+      "src": "./icon-sudafrica-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

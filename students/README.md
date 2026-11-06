@@ -41,4 +41,9 @@ Einträge 18 px, Notizen und Mengen 16 px, Kategorien 19 px, Planungstexte 17 px
 
 ## Students 1.2.0 – App-Symbol
 
-Anzeigename auf dem Home-Bildschirm: Packliste. Neues warmes Sonnenuntergangssymbol mit der gewünschten Aufschrift „Sudafica“. PNGs mit 180, 192 und 512 Pixeln; separate Apple-Touch-Verknüpfung und Android-Manifest. Identität, URL und lokaler Speicher unverändert. Bereits installierte Symbole können vom Betriebssystem zwischengespeichert bleiben; eine Aktualisierung der App garantiert keine sofortige Aktualisierung des Home-Symbols. Browser-/App-Daten nicht löschen, um Häkchen zu behalten.
+Anzeigename auf dem Home-Bildschirm: Packliste. Neues warmes Sonnenuntergangssymbol mit der ursprünglich falsch geschriebenen Aufschrift „Sudafica“. PNGs mit 180, 192 und 512 Pixeln; separate Apple-Touch-Verknüpfung und Android-Manifest. Identität, URL und lokaler Speicher unverändert. Bereits installierte Symbole können vom Betriebssystem zwischengespeichert bleiben; eine Aktualisierung der App garantiert keine sofortige Aktualisierung des Home-Symbols. Browser-/App-Daten nicht löschen, um Häkchen zu behalten.
+
+
+## Students 1.2.1 – korrigiertes App-Symbol
+
+Schreibfehler „Sudafica“ → „Sudafrica“ im App-Symbol korrigiert. Neue PNG-Assets mit 180, 192 und 512 Pixeln sowie aktualisierte Links im HTML, Android-Manifest und Service Worker (Cache v4). Start-URL, PWA-ID, Speicherkennungen und persönliche Häkchen bleiben unverändert. Bereits installierte Home-Symbole können auf iOS/Android vom System gecacht sein; eine Neuinstallation der Verknüpfung kann zur Symbolaktualisierung nötig sein. **App-/Website-Daten nicht löschen.**
