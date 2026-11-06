@@ -32,3 +32,8 @@ Zusätzliche Service-Worker-Tests mit simuliertem Netzwerk/Cache bestanden: netw
 Öffentliche Ausgabe im Browser geprüft: 95 Einträge, deutsche Oberfläche und alle geforderten Bereiche; Suche nach Mikrofaserhandtuch; Markierung per Enter und Erhalt nach Neuladen; Filter „Erledigt“; Mengenänderung und Erhalt nach Neuladen; Schaltfläche „Online aktualisieren“ meldet aktuellen Stand. Teständerungen danach zurückgesetzt. Keine Warnungen oder Fehler im Seitenprotokoll. Visuelle Kontrolle bei 390 × 844 Pixeln bestanden. GitHub-Pages-Deployment für App-Commit `843b64fc04a3c93a6cbc3420604d9bb55a7a8f0b`: erfolgreich (Run 42202539766). Commit-Vergleich bestätigt ausschließlich neue Dateien unter `students/`.
 
 Physische iPhones und Android-Geräte stehen für diesen Lauf nicht zur Verfügung. Installation, echte Touch-Langdruck-Gesten und Offline-Betrieb auf diesen Geräten sind noch nicht bestätigt. Offline- und zentrale Update-Migration wurden simuliert getestet, nicht als reales Geräte-/Produktionsupdate. Der lokale Browserzugriff war durch eine Verbindungszeitüberschreitung blockiert; die öffentliche Ausgabe wurde stattdessen erfolgreich geprüft.
+
+
+## Students 1.1.0 – Lesbarkeit
+
+Einträge 18 px, Notizen und Mengen 16 px, Kategorien 19 px, Planungstexte 17 px. Größere Bedienelemente, stärkere Textkontraste und umbrechende Filter. Speicherkennungen und Eintrags-IDs unverändert; vorhandene Häkchen bleiben erhalten.
