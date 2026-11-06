@@ -37,3 +37,8 @@ Physische iPhones und Android-Geräte stehen für diesen Lauf nicht zur Verfügu
 ## Students 1.1.0 – Lesbarkeit
 
 Einträge 18 px, Notizen und Mengen 16 px, Kategorien 19 px, Planungstexte 17 px. Größere Bedienelemente, stärkere Textkontraste und umbrechende Filter. Speicherkennungen und Eintrags-IDs unverändert; vorhandene Häkchen bleiben erhalten.
+
+
+## Students 1.2.0 – App-Symbol
+
+Anzeigename auf dem Home-Bildschirm: Packliste. Neues warmes Sonnenuntergangssymbol mit der gewünschten Aufschrift „Sudafica“. PNGs mit 180, 192 und 512 Pixeln; separate Apple-Touch-Verknüpfung und Android-Manifest. Identität, URL und lokaler Speicher unverändert. Bereits installierte Symbole können vom Betriebssystem zwischengespeichert bleiben; eine Aktualisierung der App garantiert keine sofortige Aktualisierung des Home-Symbols. Browser-/App-Daten nicht löschen, um Häkchen zu behalten.
