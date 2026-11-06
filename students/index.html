@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#9B3E2B" />
+  <meta name="description" content="Packliste Students: 2 Monate Südafrika, wöchentliche Wäsche, Campus, Krankenhaus, Wandern und Meer." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Packliste Students" />
+  <style>
+:root {
+  color-scheme: light;
+  --ink:#24352E;
+  --muted:#66736A;
+  --green:#005A46;
+  --green-light:#F0F5ED;
+  --line:#E1E6DD;
+  --paper:#fff;
+  --bg:#F8F5ED;
+  --accent:#E3B14B;
+  --danger:#ad4a43;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+*, *::before, *::after{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:var(--bg);min-height:100vh}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #e6a32c;outline-offset:3px}
+.app{max-width:610px;margin:0 auto;padding:24px 18px 12px;padding-bottom:max(18px,env(safe-area-inset-bottom));}
+.topbar{display:flex;align-items:center;gap:13px;margin:7px 0 25px}
+.brand-icon{width:48px;height:48px;display:grid;place-items:center;background:#eaf3ea;border:1px solid #dce7df;border-radius:15px;flex-shrink:0;font-size:27px}
+.brand-copy{flex:1;min-width:0}
+.eyebrow{display:block;font-size:10px;font-weight:800;letter-spacing:1.6px;color:#59756c}
+h1{font-weight:850;letter-spacing:-1.2px;font-size:29px;line-height:1.1;margin:4px 0 0}
+.help-button{border:1px solid #dce5df;background:#fff;border-radius:50%;height:36px;width:36px;font-weight:850;color:#507268;font-size:16px}
+.overview{background:var(--green);color:#fff;border-radius:22px;padding:21px 21px 19px;box-shadow:0 10px 24px #005A461b;position:relative;overflow:hidden}
+.overview::after{content:"";position:absolute;right:-25px;top:-46px;width:145px;height:145px;border:24px solid #ffffff0c;border-radius:50%;pointer-events:none}
+.overview-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.overview-owner{display:inline-flex;align-items:center;gap:8px;min-width:0;max-width:calc(100% - 48px);border:0;padding:3px 0;background:transparent;color:#e1f4e6;text-align:left;font-size:15px;font-weight:800;line-height:1.35;letter-spacing:-.15px}
+.overview-owner svg{flex-shrink:0;opacity:.78}
+.overview-owner-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.overview-owner:hover svg,.overview-owner:focus-visible svg{opacity:1}
+.overview-label{font-size:10px;font-weight:750;letter-spacing:1.5px;color:#d5e7da}
+.overview-percentage{font-size:14px;font-weight:750;color:#ffde9a}
+.overview-main{display:flex;align-items:baseline;gap:6px;margin:9px 0 17px;position:relative;z-index:1}
+.overview-main strong{font-size:48px;letter-spacing:-2px;line-height:1;font-weight:850;font-variant-numeric:tabular-nums}
+.overview-divider,.overview-main #overallTotal{font-size:28px;color:#cbded1;font-weight:500;font-variant-numeric:tabular-nums}
+.overview-word{font-size:13px;color:#d8e5df;margin-left:4px}
+.meter{height:9px;border-radius:12px;background:#437363;overflow:hidden;position:relative;z-index:1}
+.meter>div{height:100%;width:0%;background:#ffce68;border-radius:12px;transition:width .26s ease}
+.overview-foot{font-size:11px;margin:12px 0 0;color:#c9e0d7}
+.section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:13px}
+.section-heading h2{font-size:17px;letter-spacing:-.4px;margin:0;font-weight:850}
+.section-hint{font-size:11px;color:var(--muted);white-space:nowrap}
+.local-note{font-size:10.5px;color:var(--muted);margin:12px 1px 0;line-height:1.5}
+.checklist-section{margin-top:29px}
+.list-heading{margin-bottom:13px}
+.search-box{height:46px;border:1px solid var(--line);border-radius:13px;background:#fff;display:flex;align-items:center;gap:10px;padding:0 14px;color:#93a39c}
+.search-box:focus-within{border-color:#7eae94;box-shadow:0 0 0 3px #71a68c20}
+.search-box input{width:100%;border:0;background:transparent;outline:0;color:var(--ink);font-size:14px}
+.search-box input::placeholder{color:#a0ada6}
+.filter-row{display:flex;gap:7px;overflow-x:auto;margin:11px 0 13px;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-button{border-radius:999px;border:1px solid #dfe6df;background:transparent;font-size:12px;font-weight:700;color:#73827b;padding:8px 13px;white-space:nowrap}
+.filter-button.active{background:var(--green);border-color:var(--green);color:#fff}
+.hold-tip{font-size:11.5px;line-height:1.5;color:#697d74;margin:2px 2px 18px}
+.hold-tip strong{color:#365749}
+.categories{display:flex;flex-direction:column;gap:12px}
+.category{border:1px solid var(--line);border-radius:17px;background:var(--paper);box-shadow:0 2px 5px #142b2410;overflow:hidden}
+.category-toggle{width:100%;display:flex;align-items:center;gap:10px;padding:15px 15px 13px;border:none;background:#fff;text-align:left;color:var(--ink)}
+.category-emoji{display:grid;place-items:center;height:33px;width:33px;flex-shrink:0;border-radius:10px;background:#f2f6f1;font-size:18px}
+.category-heading{min-width:0;flex:1}
+.category-heading strong{font-size:13.5px;font-weight:850;display:block;line-height:1.35}
+.category-heading small{font-size:10.5px;color:#8a9990;display:block;margin-top:2px}
+.category-count{font-size:11px;font-weight:800;color:#326e54;background:#EEF5E9;border-radius:20px;padding:5px 9px;flex-shrink:0;font-variant-numeric:tabular-nums}
+.chevron{height:18px;width:18px;flex-shrink:0;color:#98a79d;transition:transform .2s ease}
+.category.collapsed .chevron{transform:rotate(-90deg)}
+.category-items{border-top:1px solid #eff2ee}
+.category.collapsed .category-items{display:none}
+.item-row{min-height:57px;padding:10px 13px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #f1f3f0;transition:background .15s ease}
+.item-row:last-child{border-bottom:0}
+.item-row.checked{background:#f8fbf7}
+.check-button{touch-action:pan-y;position:relative;flex:0 0 37px;width:37px;height:37px;border:0;background:transparent;border-radius:10px;display:grid;place-items:center;padding:0;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
+.check-visual{position:relative;display:grid;place-items:center;width:25px;height:25px;border:2px solid #a6b8ab;border-radius:8px;background:#fff;color:#fff;transition:background .15s ease,border .15s ease;overflow:hidden}
+.check-button[aria-pressed="true"] .check-visual{background:#007F5D;border-color:#007F5D}
+.check-visual svg{width:16px;height:16px;stroke-width:3;visibility:hidden}
+.check-button[aria-pressed="true"] svg{visibility:visible}
+.check-button.pressing .check-visual{border-color:#ca902c}
+.check-button.pressing .check-visual::after{content:"";position:absolute;bottom:0;left:0;right:0;height:5px;transform-origin:left;transform:scaleX(0);background:var(--accent);animation:hold-progress .7s linear forwards}
+@keyframes hold-progress{to{transform:scaleX(1)}}
+.item-copy{flex:1;min-width:0}
+.item-name{font-size:12.8px;line-height:1.4;font-weight:650;overflow-wrap:anywhere}
+.item-row.checked .item-name{color:#71857a;text-decoration:line-through;text-decoration-color:#9ab3a2}
+.item-note{color:#87958d;line-height:1.35;font-size:10.6px;margin-top:4px;overflow-wrap:anywhere}
+.edit-button{background:transparent;color:#a3afa5;border:0;border-radius:9px;min-width:31px;height:33px;display:grid;place-items:center;flex-shrink:0}
+.edit-button:hover,.edit-button:focus-visible{color:#005A46;background:#edf5ec}
+.edit-button svg{width:16px;height:16px}
+.empty-state{padding:28px 18px;text-align:center;background:#fff;border:1px dashed #dae6dc;border-radius:16px}
+.empty-state .empty-icon{font-size:27px;margin-bottom:10px}
+.empty-state strong{display:block;font-size:14px}
+.empty-state p{color:var(--muted);font-size:12px;line-height:1.5;margin-bottom:0}
+.bottom-action{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom));z-index:2;display:flex;justify-content:center;margin:22px 0 0;pointer-events:none}
+.add-button{pointer-events:auto;width:100%;max-width:540px;min-height:50px;border:none;background:#005A46;color:white;font-size:13px;font-weight:800;border-radius:14px;box-shadow:0 6px 18px #1e493838;display:flex;align-items:center;justify-content:center;gap:9px}
+.add-button:hover{background:#236449}
+.plus-icon{font-size:22px;font-weight:400;line-height:1}
+.footer{color:#a5afa8;display:flex;justify-content:space-between;gap:8px;font-size:10px;margin:26px 2px 0}
+.modal{width:calc(100vw - 28px);max-width:480px;max-height:min(90dvh,770px);overflow:auto;border:1px solid #e2eae5;border-radius:20px;background:#fff;box-shadow:0 20px 75px #122c2357;padding:22px;color:var(--ink)}
+.modal::backdrop{background:rgba(18,37,31,.70)}
+.modal-form{display:flex;flex-direction:column;gap:9px}
+.modal-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:11px}
+.modal-top h2{margin:6px 0 0;font-size:22px;letter-spacing:-.8px}
+.close-button{width:34px;height:34px;flex-shrink:0;border:1px solid #e2e7e2;border-radius:50%;background:#fff;color:#596b61;font-size:23px;line-height:1}
+.modal label{font-size:12px;font-weight:800;margin-top:3px}
+.required{color:#b74d4d}
+.optional{font-weight:500;color:#8b9790}
+.modal input,.modal select,.modal textarea{width:100%;border:1px solid #dce5dd;border-radius:10px;background:#fff;color:var(--ink);padding:11px 12px;font-size:14px;resize:vertical}
+.modal-actions{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-top:14px}
+.save-button{margin-left:auto;border:0;background:#005A46;border-radius:11px;color:#fff;padding:12px 25px;font-weight:800;font-size:13px;min-height:44px}
+.delete-button{border:0;background:transparent;color:var(--danger);font-weight:750;font-size:12px;padding:10px 6px}
+.help-modal p{font-size:13px;line-height:1.65;color:#3d5048}
+.help-modal .help-note{color:#7a665a;background:#FFF8E9;border:1px solid #f1e8d2;border-radius:11px;padding:12px}
+.save-button.full{width:100%;margin-top:8px}
+.toast{position:fixed;bottom:max(85px,calc(85px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);background:#263d33;color:#fff;border-radius:999px;padding:10px 16px;font-size:12px;font-weight:700;box-shadow:0 5px 20px #1a302530;white-space:nowrap;z-index:10;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+.storage-notice{position:fixed;left:10px;right:10px;top:10px;z-index:30;background:#fff3d9;color:#764a11;border:1px solid #d3ae65;border-radius:10px;padding:12px;font-size:12px;line-height:1.5;text-align:center}
+[hidden]{display:none!important}
+@media (min-width:650px){.app{padding:30px 25px 22px}.overview{padding:25px}.item-row{padding:12px 16px}}
+@media (max-width:340px){.app{padding-left:12px;padding-right:12px}.category-heading strong{font-size:12.4px}.item-name{font-size:12px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+/* v0.2: selettore lingua sempre disponibile, singola lista */
+.header-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.language-switch{display:flex;padding:3px;border:1px solid #dce5df;background:#eaf0eb;border-radius:12px;gap:2px}
+.language-switch button{border:0;border-radius:8px;background:transparent;color:#50645b;padding:8px 9px;min-height:34px;font-size:12px;font-weight:850;letter-spacing:.3px}
+.language-switch button[aria-pressed="true"]{background:#005A46;color:#fff;box-shadow:0 1px 4px #17362a20}
+.field-hint{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
+.local-note{margin:11px 4px 0}
+.checklist-section{margin-top:23px}
+@media(max-width:360px){.brand-icon{height:42px;width:42px;font-size:23px}.topbar{gap:8px}.brand-copy h1{font-size:25px}.language-switch button{padding:7px}.header-actions{gap:5px}}
+@media(max-width:360px){.overview-owner{font-size:13.5px}}
+
+/* v0.4: identità fissa, colori del Sudafrica e webview resume più leggero. */
+html, body { background-color: #F8F5ED !important; }
+body::before {content:"";display:block;height:5px;background:linear-gradient(90deg,#DE3831 0 19%,#fff 19% 22%,#007B57 22% 49%,#F6C644 49% 75%,#00689D 75% 100%)}
+.topbar {padding-top:5px}
+.brand-icon {background:#FFF4CE!important}
+.overview {background:linear-gradient(128deg,#005A46,#006F58 71%,#1D806D)!important;position:relative;overflow:hidden}
+.overview::before {content:"";position:absolute;right:-50px;top:-60px;width:160px;height:160px;border:24px solid rgba(246,198,68,.12);border-radius:50%;pointer-events:none}
+.overview-owner-name {font-weight:850;letter-spacing:.2px;color:#FFF4D4}
+.overview-top {position:relative;z-index:1}
+.overview .meter {background:rgba(255,255,255,.23)}
+.overview #overallMeterFill {background:#F6C644}
+.category-emoji {background:#FFF3D7}
+.category-count {background:#E8F3EA;color:#006848}
+.category-toggle {border-left:4px solid var(--profile-accent,#E3B14B)}
+.add-button,.save-button {background:#00624C}
+.add-button:hover {background:#007F5D}
+.language-switch button[aria-pressed="true"] {background:#00624C}
+.category[data-category="tygerberg"] .category-toggle {border-left-color:#E3B14B}
+.item-row.checked {background:#F5F9F1}
+.header-actions {z-index:2}
+@media(prefers-reduced-motion:reduce) {.check-button.pressing .check-visual::after {animation-duration:.7s}}
+
+/* v0.5: un solo profilo, niente scelta tirocinio, Type M in evidenza. */
+.category[data-category="elettronica"] .item-row.critical-item {background:#FFF8E9;border-left:4px solid #C8563E;padding-left:9px;}
+.item-row.critical-item .item-name {color:#983D29;font-weight:850;}
+.item-row.critical-item .item-note {color:#855743;font-weight:500;}
+.item-row.critical-item.checked {background:#F9F4E8;}
+
+/* v0.6: colori Karoo / savana al tramonto. Solo stile, nessun cambiamento ai dati. */
+:root {--ink:#382B22;--muted:#766A5B;--green:#3D563D;--green-light:#F7E9D0;--line:#E8D9C7;--paper:#FFFCF7;--bg:#FBF0DF;--accent:#E3A744;--danger:#A3442B}
+html,body {background-color:#FBF0DF!important;color:var(--ink)}
+body::before {background:linear-gradient(90deg,#BA4A2D 0 20%,#D98445 20% 43%,#E7B75C 43% 66%,#879049 66% 86%,#3E5741 86% 100%)}
+.brand-icon {background:#F8E1B6!important;border-color:#EBCB91;color:#583D27}
+.eyebrow {color:#9C6440}
+.help-button {border-color:#E3CDB0;color:#74513A;background:#FFF9F1}
+.overview {background:linear-gradient(125deg,#793D2C 0%,#A74F2F 59%,#C4773D 100%)!important;box-shadow:0 12px 28px #8E462A2B}
+.overview::before {border-color:rgba(248,209,122,.18)}
+.overview::after {border-color:rgba(255,239,197,.10)}
+.overview-owner-name {color:#FFF2CF}
+.overview-label,.overview-word,.overview-foot {color:#F9E4CB}
+.overview-divider,.overview-main #overallTotal {color:#F2D9BE}
+.overview-percentage {color:#FFDF8D}
+.overview #overallMeterFill {background:#FFD26A}
+.overview .meter {background:#6B321FA0}
+.search-box {background:#FFFBF5;color:#927E66;border-color:#E6D5BB}
+.search-box:focus-within {border-color:#C89044;box-shadow:0 0 0 3px #E4B15833}
+.search-box input::placeholder {color:#AA9882}
+.filter-button {border-color:#DFCCAE;color:#755F4A;background:#FFF8EC}
+.filter-button.active {background:#465C40;border-color:#465C40;color:#FFFDF3}
+.hold-tip,.local-note {color:#786955}
+.hold-tip strong {color:#70462B}
+.category {border-color:#E8DAC6;background:#FFFCF7;box-shadow:0 3px 8px #845B3311}
+.category-toggle {background:#FFFAF2;border-left-color:var(--profile-accent,#D49A3B)}
+.category-emoji {background:#F6E1BE}
+.category-heading small {color:#877560}
+.category-count {background:#F2E4C9;color:#765528}
+.chevron {color:#AA8B62}
+.category-items {border-top-color:#F0E5D6}
+.item-row {border-bottom-color:#F4E9DC}
+.item-row.checked {background:#F7F1E3}
+.item-row.checked .item-name {color:#94826A;text-decoration-color:#B7A382}
+.item-note {color:#897A68}
+.check-visual {border-color:#B8A88D}
+.check-button[aria-pressed="true"] .check-visual {background:#536C43;border-color:#536C43}
+.check-button.pressing .check-visual {border-color:#C77B36}
+.edit-button {color:#AB9580}
+.edit-button:hover,.edit-button:focus-visible {color:#694A31;background:#F7E7CC}
+.add-button,.save-button {background:#465C40;box-shadow:0 8px 22px #42513433}
+.add-button:hover,.save-button:hover {background:#324B33}
+.language-switch {background:#F1DEC0;border-color:#DFBE8F}
+.language-switch button {color:#73533C}
+.language-switch button[aria-pressed="true"] {background:#8A4A30;color:#FFF9EE;box-shadow:0 2px 5px #733A2D33}
+.modal {background:#FFFBF5;color:#382B22;border-color:#E6CFB1}
+.modal input,.modal select,.modal textarea {border-color:#E3D1BA}
+.modal::backdrop {background:rgba(45,32,22,.66)}
+.toast {background:#513C2D;color:#FFF8E9}
+.help-modal p {color:#594A3C}
+.help-modal .help-note {color:#784B2E;background:#FFF3DB;border-color:#EFD7A8}
+.category[data-category="elettronica"] .item-row.critical-item {background:#FFF1DB;border-left:4px solid #C86435}
+.item-row.critical-item .item-name {color:#9B472A}
+.item-row.critical-item .item-note {color:#916744}
+.item-row.critical-item.checked {background:#F8EDDA}
+:focus-visible {outline-color:#D59C45}
+
+
+
+/* v0.7 — TRAMONTO AFRICANO. Palette 2 approvata, modifica soltanto grafica. */
+:root {
+  --ink:#4C3028; --muted:#785C50; --green:#9B3E2B;
+  --green-light:#F9E2D0; --line:#E9BEA9; --paper:#FFF3E4;
+  --bg:#F5D4BB; --accent:#EBA75D; --danger:#9B362D;
+}
+html,body {background-color:#F5D4BB!important;color:var(--ink)}
+body::before {background:linear-gradient(90deg,#8C332C 0 26%,#C96543 26% 52%,#F0B763 52% 79%,#70754B 79% 100%)}
+.brand-icon {background:#FFE1BB!important;border-color:#E9B580;color:#713E30}
+.eyebrow {color:#894B35}
+.help-button {border-color:#E4B5A0;color:#8E402F;background:#FFF3E4}
+.overview {
+  background:linear-gradient(125deg,#78302A 0%,#9B3E2B 55%,#BF5B3C 100%)!important;
+  box-shadow:0 12px 28px #833C2C3C;
+}
+.overview::before {border-color:rgba(249,189,115,.17)}
+.overview::after {border-color:rgba(255,233,199,.12)}
+.overview-owner-name {color:#FFF4E4}
+.overview-label,.overview-word,.overview-foot {color:#FFE6D5}
+.overview-divider,.overview-main #overallTotal {color:#F9D9BF}
+.overview-percentage {color:#FFE09B}
+.overview #overallMeterFill {background:#FFC36D}
+.overview .meter {background:rgba(94,31,26,.56)}
+.local-note,.hold-tip {color:#76594D}
+.hold-tip strong {color:#783927}
+.section-hint {color:#755548}
+.search-box {background:#FFF3E4;color:#967062;border-color:#E6BDA9}
+.search-box:focus-within {border-color:#B95E3E;box-shadow:0 0 0 3px #CB785031}
+.search-box input::placeholder {color:#9F8276}
+.filter-button {background:#FFEADC;border-color:#E6BAA4;color:#794D3E}
+.filter-button.active {background:#91392B;border-color:#91392B;color:#FFF7ED}
+.category {background:#FFF3E4;border-color:#E9BFA9;box-shadow:0 3px 8px #8A443014}
+.category-toggle {background:#FFF0DF;border-left-color:var(--profile-accent,#D49A3B)}
+.category-emoji {background:#F9DEC0}
+.category-heading small {color:#846154}
+.category-count {background:#F5D6B8;color:#773C2C}
+.chevron {color:#9B6D58}
+.category-items {border-top-color:#EAC8B4}
+.item-row {border-bottom-color:#F2D5C4}
+.item-row.checked {background:#F8E0CE}
+.item-row.checked .item-name {color:#866B5C;text-decoration-color:#A58A79}
+.item-note {color:#806657}
+.check-visual {border-color:#B59685}
+.check-button[aria-pressed="true"] .check-visual {background:#66704C;border-color:#66704C}
+.check-button.pressing .check-visual {border-color:#A84E31}
+.edit-button {color:#A67D69}
+.edit-button:hover,.edit-button:focus-visible {color:#813B2B;background:#F7D9BC}
+.add-button,.save-button {background:#9B3E2B;box-shadow:0 8px 22px #7B342D40}
+.add-button:hover,.save-button:hover {background:#7C3026}
+.language-switch {background:#F2C9AD;border-color:#DC9D82}
+.language-switch button {color:#773E31}
+.language-switch button[aria-pressed="true"] {background:#9B3E2B;color:#FFF9EE;box-shadow:0 2px 6px #67302738}
+.modal {background:#FFF3E4;color:var(--ink);border-color:#E5B9A4}
+.modal label {color:#6E4638}
+.modal input,.modal select,.modal textarea {background:#FFFAF3;border-color:#E5B8A4}
+.modal::backdrop {background:rgba(60,30,25,.65)}
+.close-button {background:#FFFAF3;border-color:#E5B8A4;color:#7E4938}
+.toast {background:#713628;color:#FFF6EA}
+.help-modal p {color:#654B3E}
+.help-modal .help-note {color:#79492F;background:#FFF0DA;border-color:#E9C49D}
+.category[data-category="elettronica"] .item-row.critical-item {background:#FFDEB7;border-left-color:#AB3C2A}
+.item-row.critical-item .item-name {color:#8B3125}
+.item-row.critical-item .item-note {color:#80503D}
+.item-row.critical-item.checked {background:#F5D8BF}
+.footer {color:#866251}
+:focus-visible {outline-color:#C15E3F}
+
+
+/* v0.8: quantità suggerite, leggere e ben distinte dai nomi */
+.item-name-line {display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 9px}
+.item-quantity {display:inline-block;padding:2px 7px;border-radius:7px;background:#FFE2AF;color:#793A24;border:1px solid #DDB184;font-size:.78rem;font-weight:750;line-height:1.35;white-space:normal}
+.item-row.checked .item-quantity {background:#F2D6BC;color:#80634F;border-color:#E9C6AB}
+.weight-brief {background:#FFF1DB;border:1px solid #DFA979;border-left:5px solid #B35032;border-radius:13px;padding:12px 14px;margin:12px 0;color:#673F2E}
+.weight-brief strong {display:block;font-size:.96rem;line-height:1.4;color:#853A26}
+.weight-brief p {margin:5px 0 0;font-size:.86rem;line-height:1.48;color:#6B4B3B}
+.weight-brief .weight-small {font-size:.79rem;color:#836350}
+.modal #itemQuantity {width:100%}
+
+</style>
+  <title>Packliste Südafrika 2026 – Students</title>
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-v2.png"></head>
+<body>
+  <div class="app">
+    <header class="topbar" style="--profile-accent:#7D873E">
+      <div class="brand-icon" aria-hidden="true"><span>🇿🇦</span></div>
+      <div class="brand-copy"><span class="eyebrow">SUDAFRICA · 2026</span><h1>Packliste</h1></div>
+      <div class="header-actions">
+        <div id="languageSwitch" hidden class="language-switch" role="group" aria-label="Lingua dell’app" data-i18n-aria="languageAria">
+          <button type="button" data-lang="it" lang="it" aria-pressed="true">IT</button>
+          <button type="button" data-lang="de" lang="de" aria-pressed="false">DE</button>
+        </div>
+        <button class="help-button" id="helpButton" type="button" aria-label="Come funziona l’app" data-i18n-aria="helpAria" title="Come funziona" data-i18n-title="helpTitleAttr">?</button>
+      </div>
+    </header>
+
+    <main style="--profile-accent:#7D873E">
+      <section class="overview" aria-label="Fortschritt">
+        <div class="overview-top">
+          <span id="ownerNameText" class="overview-owner-name">La lista di Luca</span>
+          <span class="overview-percentage" id="overallPercent">0%</span>
+        </div>
+        <div class="overview-main"><strong id="overallDone">0</strong><span class="overview-divider">/</span><span id="overallTotal">0</span><span class="overview-word" data-i18n="readyWord">pronti</span></div>
+        <div class="meter" role="progressbar" aria-label="Elementi pronti" data-i18n-aria="progressAria" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="overallMeter"><div id="overallMeterFill"></div></div>
+        <p class="overview-foot" data-i18n="overviewFoot">Una cosa alla volta, poi si parte ✈</p>
+      </section>
+      <p class="local-note"><span aria-hidden="true">🔒</span> <span data-i18n="localNote">Le modifiche restano su questo dispositivo. Nessuna sincronizzazione.</span></p>
+
+
+      <section class="weight-brief" aria-label="Gepäck und Mengen"><strong data-i18n="weightHeading">Budget bagaglio · il peso include la valigia vuota</strong><p data-i18n="weightPending"></p><p class="weight-small" data-i18n="weightNote"></p><p class="weight-small" data-i18n="weightIrene"></p></section>
+      <p class="local-note" id="updateStatus" role="status"></p><button class="filter-button" id="updateButton" type="button">Online aktualisieren</button>
+      <section class="checklist-section" aria-labelledby="listTitle">
+        <div class="section-heading list-heading"><h2 id="listTitle" data-i18n="listTitle">La checklist</h2><span id="visibleCount" class="section-hint"></span></div>
+        <div class="search-box">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="searchInput" type="search" placeholder="Cerca nella lista…" data-i18n-placeholder="searchPlaceholder" aria-label="Cerca oggetti" data-i18n-aria="searchAria" autocomplete="off" />
+        </div>
+        <div class="filter-row" id="filterRow" role="group" aria-label="Filtra la checklist" data-i18n-aria="filterAria">
+          <button type="button" data-filter="all" class="filter-button active" aria-pressed="true" data-i18n="all">Tutti</button>
+          <button type="button" data-filter="todo" class="filter-button" aria-pressed="false" data-i18n="todo">Da preparare</button>
+          <button type="button" data-filter="done" class="filter-button" aria-pressed="false" data-i18n="done">Pronti</button>
+        </div>
+        <p class="hold-tip"><span aria-hidden="true">☝️</span> <span data-i18n="holdIntro">Tieni premuto il</span> <strong data-i18n="holdEmphasis">quadratino per 0,7 secondi</strong> <span data-i18n="holdOutro">per spuntare o deselezionare.</span></p>
+        <div id="categoryList" class="categories" aria-live="polite"></div>
+      </section>
+      <div class="bottom-action"><button type="button" id="addItemButton" class="add-button"><span class="plus-icon" aria-hidden="true">+</span> <span data-i18n="addItem">Aggiungi oggetto</span></button></div>
+    </main>
+
+    <footer class="footer"><span>Packliste Sudafrica 2026</span><span data-i18n="footerVersion">v1.0 · Offline</span></footer>
+  </div>
+
+  <dialog id="itemDialog" class="modal" aria-labelledby="itemDialogTitle">
+    <form id="itemForm" class="modal-form">
+      <div class="modal-top"><div><span class="eyebrow" data-i18n="editingEyebrow">PERSONALIZZA LA LISTA</span><h2 id="itemDialogTitle">Aggiungi oggetto</h2></div><button type="button" class="close-button" data-close="itemDialog" aria-label="Chiudi" data-i18n-aria="close">×</button></div>
+      <label for="itemName"><span data-i18n="itemNameLabel">Oggetto</span> <span class="required">*</span></label>
+      <input id="itemName" name="name" maxlength="100" required placeholder="Es. Occhiali da sole" data-i18n-placeholder="itemNamePlaceholder" />
+      <label for="itemCategory" data-i18n="itemCategoryLabel">Categoria</label>
+      <select id="itemCategory" name="category" required></select>
+      <label for="itemQuantity" data-i18n="quantityLabel">Quantità suggerita</label>
+      <input id="itemQuantity" name="quantity" maxlength="44" placeholder="Es. 7–8 capi" data-i18n-placeholder="quantityPlaceholder" />
+      <label for="itemNote"><span data-i18n="itemNoteLabel">Nota</span> <span class="optional" data-i18n="optional">(facoltativa)</span></label>
+      <textarea id="itemNote" name="note" maxlength="240" rows="2" placeholder="Dettagli utili…" data-i18n-placeholder="itemNotePlaceholder"></textarea>
+      <div class="modal-actions"><button type="button" id="deleteItemButton" class="delete-button" hidden data-i18n="delete">Elimina</button><button type="submit" class="save-button" data-i18n="save">Salva</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="helpDialog" class="modal help-modal" aria-labelledby="helpTitle">
+    <div class="modal-top"><div><span class="eyebrow" data-i18n="quickInstructions">ISTRUZIONI RAPIDE</span><h2 id="helpTitle" data-i18n="helpTitle">Come funziona</h2></div><button type="button" class="close-button" data-close="helpDialog" aria-label="Chiudi" data-i18n-aria="close">×</button></div>
+    <p data-i18n="helpPress">Tieni premuto il quadratino per 0,7 secondi per segnare un oggetto pronto o riportarlo da preparare. Un tocco breve non cambia la spunta.</p>
+    <p data-i18n="helpLanguage">Puoi passare da IT a DE quando vuoi: le spunte e gli oggetti non cambiano. Gli oggetti aggiunti o i testi personalizzati rimangono nella lingua in cui li hai scritti.</p>
+    <p data-i18n="helpPersonal">Questa versione ha un nome fisso, invariato quando cambi lingua.</p>
+    <p data-i18n="helpEdit">Usa + per aggiungere oggetti e la matita per modificarli o eliminarli.</p>
+    <p data-i18n="helpQuantities"></p>
+    <p class="help-note" data-i18n="helpStorage">I dati vengono salvati in questo browser. Non ci sono account, sincronizzazione tra telefoni o backup. Cancellando i dati del browser potresti perdere le modifiche.</p>
+    <button type="button" class="save-button full" data-close="helpDialog" data-i18n="understood">Ho capito</button>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+  <div id="storageNotice" role="alert" class="storage-notice" hidden data-i18n="storageNotice">Attenzione: il browser non permette di salvare i dati. Le modifiche potrebbero scomparire quando chiudi la pagina.</div>
+<script>window.PACKLISTE_PROFILE = {"id":"students","name":"Students","defaultLanguage":"de","extras":[],"extraCategories":[]};</script>
+<script>window.PACKLISTE_SEED = {"version":5,"categories":[{"id":"documenti","name":"Dokumente & Buchungen","icon":"🛂","description":"Vor der Abreise"},{"id":"bagaglio-mano","name":"Handgepäck","icon":"🎒","description":"Immer griffbereit"},{"id":"abbigliamento","name":"Kleidung","icon":"👕","description":"Für den Koffer"},{"id":"salute","name":"Gesundheit & Hygiene","icon":"🧴","description":"Reiseapotheke & Körperpflege"},{"id":"elettronica","name":"Elektronik","icon":"🔌","description":"Kabel & Geräte"},{"id":"outdoor","name":"Wandern & Berge","icon":"🦒","description":"Tageswanderungen, Wind und wechselndes Wetter"},{"id":"mare","name":"Strand & Meer","icon":"🏖️","description":"Baden und freie Tage am Meer"},{"id":"campus","name":"Campus","icon":"🎓","description":"Studium und Alltag für 2 Monate"},{"id":"krankenhaus","name":"Krankenhaus","icon":"🩺","description":"Ausstattung mit der Abteilung abstimmen"},{"id":"ultimi","name":"Letzte Checks","icon":"✅","description":"Kurz vor dem Aufbruch"}],"items":[{"id":"documenti-01","category":"documenti","name":"Reisepass","note":"Gültigkeit und freie Seiten prüfen"},{"id":"documenti-02","category":"documenti","name":"Flugtickets und Bordkarten","note":"Kopie offline verfügbar halten"},{"id":"documenti-03","category":"documenti","name":"Reiseversicherung","note":"Versicherungsnummer und Notfallkontakt"},{"id":"documenti-04","category":"documenti","name":"Unterkunftsbuchungen","note":"Adressen und Bestätigungen auch offline"},{"id":"documenti-05","category":"documenti","name":"Zahlungskarte","note":"Freischaltung für das Ausland prüfen"},{"id":"documenti-06","category":"documenti","name":"Ersatz-Zahlungskarte","note":"Getrennt von der Hauptkarte aufbewahren"},{"id":"documenti-07","category":"documenti","name":"Bargeld für die ersten Ausgaben","note":"Ein kleiner Betrag, falls sinnvoll"},{"id":"documenti-08","category":"documenti","name":"Dokumentenkopien","note":"Auf dem Handy und getrennt von den Originalen"},{"id":"documenti-09","category":"documenti","name":"Führerschein","note":"Nur, wer selbst fahren wird"},{"id":"documenti-10","category":"documenti","name":"Internationaler Führerschein","note":"Prüfen, ob für den Mietwagen nötig"},{"id":"documenti-11","category":"documenti","name":"Notfallkontakte","note":"Wichtige Nummern offline speichern"},{"id":"bagaglio-mano-01","category":"bagaglio-mano","name":"Geldbörse und Originaldokumente","note":"Nicht ins aufgegebene Gepäck"},{"id":"bagaglio-mano-02","category":"bagaglio-mano","name":"Wichtige Medikamente","note":"Ggf. mit ärztlicher Verordnung"},{"id":"bagaglio-mano-03","category":"bagaglio-mano","name":"Ersatzbrille oder Kontaktlinsen","note":"Falls benötigt"},{"id":"bagaglio-mano-04","category":"bagaglio-mano","name":"Leichte Wechselkleidung","note":"Falls das Gepäck verspätet ankommt"},{"id":"bagaglio-mano-05","category":"bagaglio-mano","name":"Pullover für den Flug","note":"Kabine und Umstiege können kühl sein"},{"id":"bagaglio-mano-06","category":"bagaglio-mano","name":"Leere wiederverwendbare Trinkflasche","note":"Nach der Sicherheitskontrolle auffüllen"},{"id":"bagaglio-mano-07","category":"bagaglio-mano","name":"Reisesnacks","note":"Flughafenbestimmungen beachten"},{"id":"bagaglio-mano-08","category":"bagaglio-mano","name":"Nackenkissen und Schlafmaske","note":"Optional"},{"id":"bagaglio-mano-09","category":"bagaglio-mano","name":"Feuchttücher oder Taschentücher","note":""},{"id":"abbigliamento-01","category":"abbigliamento","name":"T-Shirts","note":""},{"id":"abbigliamento-02","category":"abbigliamento","name":"Lange Hosen","note":""},{"id":"abbigliamento-03","category":"abbigliamento","name":"Kurze Hosen","note":""},{"id":"abbigliamento-04","category":"abbigliamento","name":"Unterwäsche","note":""},{"id":"abbigliamento-05","category":"abbigliamento","name":"Socken","note":""},{"id":"abbigliamento-06","category":"abbigliamento","name":"Schlafanzug","note":""},{"id":"abbigliamento-07","category":"abbigliamento","name":"Sweatshirt oder Pullover","note":"Für den Abend"},{"id":"abbigliamento-08","category":"abbigliamento","name":"Wind- oder Regenjacke","note":""},{"id":"abbigliamento-09","category":"abbigliamento","name":"Bequeme Laufschuhe","note":""},{"id":"abbigliamento-10","category":"abbigliamento","name":"Leichte Ersatzschuhe","note":""},{"id":"abbigliamento-11","category":"abbigliamento","name":"Sandalen / Flip-Flops","note":"Dasselbe Paar wie unter Strand & Meer"},{"id":"abbigliamento-12","category":"abbigliamento","name":"Kleidung für den Abend","note":""},{"id":"abbigliamento-13","category":"abbigliamento","name":"Hut oder Mütze","note":""},{"id":"abbigliamento-14","category":"abbigliamento","name":"Sonnenbrille","note":""},{"id":"abbigliamento-15","category":"abbigliamento","name":"Wäschebeutel","note":""},{"id":"salute-01","category":"salute","name":"Persönliche Medikamente","note":"Ausreichend für die gesamte Reise"},{"id":"salute-02","category":"salute","name":"Ärztliche Verordnungen für Medikamente","note":"Wenn erforderlich"},{"id":"salute-03","category":"salute","name":"Kleine Reiseapotheke","note":"Nach individuellem Bedarf"},{"id":"salute-04","category":"salute","name":"Pflaster und kleines Verbandmaterial","note":""},{"id":"salute-05","category":"salute","name":"Sonnencreme mit hohem Lichtschutzfaktor","note":""},{"id":"salute-06","category":"salute","name":"Insektenschutzmittel","note":""},{"id":"salute-07","category":"salute","name":"Zahnbürste und Zahnpasta","note":""},{"id":"salute-08","category":"salute","name":"Deodorant","note":""},{"id":"salute-09","category":"salute","name":"Shampoo und Duschgel","note":"Flüssigkeitsregeln fürs Handgepäck beachten"},{"id":"salute-10","category":"salute","name":"Rasierer und Zubehör","note":""},{"id":"salute-11","category":"salute","name":"Hygieneartikel nach Bedarf","note":"Falls benötigt"},{"id":"salute-12","category":"salute","name":"Kontaktlinsen und Pflegemittel","note":"Falls benötigt"},{"id":"salute-13","category":"salute","name":"Handdesinfektionsmittel","note":""},{"id":"elettronica-01","category":"elettronica","name":"Smartphone","note":""},{"id":"elettronica-02","category":"elettronica","name":"Handyladegerät","note":""},{"id":"elettronica-03","category":"elettronica","name":"USB-C- oder Lightning-Kabel","note":"Passend für deine Geräte"},{"id":"elettronica-04","category":"elettronica","name":"Südafrika-Steckdosenadapter — Typ M","note":"WICHTIG: mindestens 1 pro Person. Typ M = 3 dicke Rundstifte; viele Universaladapter unterstützen ihn nicht. Auch Typ-N-Dosen vorhanden. 230 V / 50 Hz."},{"id":"elettronica-05","category":"elettronica","name":"Powerbank","note":"Ins Handgepäck; Vorgaben der Airline prüfen"},{"id":"elettronica-06","category":"elettronica","name":"Kopfhörer","note":""},{"id":"elettronica-07","category":"elettronica","name":"Tablet oder Laptop","note":"Falls benötigt"},{"id":"elettronica-08","category":"elettronica","name":"Ladegerät für Tablet oder Laptop","note":"Falls mitgenommen"},{"id":"elettronica-09","category":"elettronica","name":"Zusätzliche Kabel und Adapter","note":""},{"id":"elettronica-10","category":"elettronica","name":"Offline-Karten und gespeicherte Buchungen","note":""},{"id":"outdoor-01","category":"outdoor","name":"Kleiner Rucksack für Ausflüge","note":""},{"id":"outdoor-02","category":"outdoor","name":"Geeignete Wanderschuhe","note":""},{"id":"outdoor-03","category":"outdoor","name":"Trinkflasche","note":""},{"id":"outdoor-04","category":"outdoor","name":"Fernglas","note":"Optional für Safaris"},{"id":"outdoor-05","category":"outdoor","name":"Sonnenschutz fürs Gesicht","note":""},{"id":"outdoor-06","category":"outdoor","name":"Warme Schicht für die Morgensafari","note":""},{"id":"outdoor-07","category":"outdoor","name":"Bequeme Hose zum Wandern","note":""},{"id":"outdoor-08","category":"outdoor","name":"Kleine Taschenlampe","note":"Optional"},{"id":"mare-01","category":"mare","name":"Bikini / Badeanzug / Badehose","note":"Nach persönlicher Vorliebe"},{"id":"mare-02","category":"mare","name":"Mikrofaserhandtuch","note":"Schnelltrocknend, für Strand und Reisen"},{"id":"mare-03","category":"mare","name":"Flip-Flops","note":"Auch für Gemeinschaftsduschen; nicht doppelt packen"},{"id":"mare-04","category":"mare","name":"Strandtasche","note":""},{"id":"mare-05","category":"mare","name":"Wasserdichte Hülle","note":"Optional"},{"id":"mare-06","category":"mare","name":"Leichte Kleidung für heiße Tage","note":""},{"id":"ultimi-01","category":"ultimi","name":"Gepäckgewicht prüfen","note":"Freigepäck laut Ticket beachten"},{"id":"ultimi-02","category":"ultimi","name":"Geräte und Powerbank laden","note":""},{"id":"ultimi-03","category":"ultimi","name":"Dokumente für Offline-Nutzung herunterladen","note":""},{"id":"ultimi-04","category":"ultimi","name":"Flugzeit noch einmal prüfen","note":""},{"id":"ultimi-05","category":"ultimi","name":"Tür, Fenster und Hausschlüssel prüfen","note":""},{"id":"ultimi-06","category":"ultimi","name":"Netzteile und Ladegeräte überprüfen","note":""},{"id":"ultimi-07","category":"ultimi","name":"Fahrt zum Flughafen prüfen","note":""},{"id":"abbigliamento-16","category":"abbigliamento","name":"Langarmshirts oder leichte Hemden","note":"2 leichte Teile zum Schichten"},{"id":"abbigliamento-17","category":"abbigliamento","name":"Leichter Buff / Schlauchschal","note":"Für Wind, Boot und Safari"},{"id":"students-foehn","category":"salute","name":"Kleiner Föhn","note":"Vorher prüfen, ob die Unterkunft einen bereitstellt"},{"id":"students-sport","category":"abbigliamento","name":"Sportkleidung","note":"Für Sport und Wanderungen; wöchentlich waschen"},{"id":"students-locks","category":"bagaglio-mano","name":"Vorhängeschlösser","note":"Für Schließfächer und Unterkunft"},{"id":"students-jute","category":"campus","name":"Jutebeutel","note":"Für Einkäufe, Campus und Ausflüge"},{"id":"students-campus-id","category":"campus","name":"Studierendenausweis und Zulassung","note":"Auch offline speichern"},{"id":"students-study","category":"campus","name":"Schreibmaterial und Lernunterlagen","note":"Digitale Unterlagen offline bereithalten"},{"id":"students-laundry","category":"campus","name":"Waschmittel und Wäschebeutel","note":"Wöchentlich waschen; Waschmittel vor Ort nachkaufen"},{"id":"students-kasacks","category":"krankenhaus","name":"Kasacks und passende Klinikhosen","note":"Anzahl und Farbe mit der Abteilung abstimmen; häufiger waschen, falls erforderlich"},{"id":"students-tourniquet","category":"krankenhaus","name":"Tourniquet / Stauschlauch","note":"Nur entsprechend Ausbildung und Vorgaben der Klinik"},{"id":"students-clinic-shoes","category":"krankenhaus","name":"Geschlossene, gut zu reinigende Klinikschuhe","note":"Nur für den Klinikalltag"},{"id":"students-stethoscope","category":"krankenhaus","name":"Stethoskop","note":"Ausstattung mit der Abteilung abstimmen"},{"id":"students-clinic-docs","category":"krankenhaus","name":"Praktikumszusage und Unterlagen für den Klinik-Ausweis","note":"Anforderungen vorab mit der Klinik klären"},{"id":"students-clinic-notes","category":"krankenhaus","name":"Stift und kleiner Notizblock","note":"Keine identifizierenden Patientendaten notieren"},{"id":"students-kittel","category":"krankenhaus","name":"Weißer Kittel","note":"Nur falls von der Abteilung verlangt"}]};</script>
+<script>window.PACKLISTE_I18N = {"ui":{"it":{"helpAria":"Come funziona l’app","helpTitleAttr":"Come funziona","languageAria":"Lingua dell’app","ownerWithName":"La lista di {name}","quantityLabel":"Quantità suggerita","quantityPlaceholder":"Es. 7–8 capi o 1 paio","weightHeading":"Budget bagaglio · il peso include la valigia vuota","weightConfirmed":"Stiva 20 kg · obiettivo 17–18 kg. Cabina 8 kg (secondo i dati disponibili per questo volo).","weightPending":"Se hai 20 kg in stiva, punta a 17–18 kg. Controlla prima la franchigia nella tua prenotazione.","weightNote":"Quantità suggerite per 7–10 giorni con bucato. Non sommare due volte scarpe, pile e abiti ripetuti nelle attività. Power bank in cabina.","weightIrene":"Tirocinio Tygerberg per 8 settimane: prevedi bucato settimanale, non 8 settimane di cambi. Camice, scrubs e scarpe da clinica solo secondo le indicazioni del reparto.","helpQuantities":"Le etichette ocra mostrano quantità indicative; puoi cambiarle dalla matita. Le voci ripetute tra attività e valigia non richiedono doppi oggetti.","overviewLabel":"LA TUA LISTA","progressAria":"Elementi pronti","readyWord":"pronti","overviewFoot":"Una cosa alla volta, poi si parte ✈","localNote":"Le modifiche restano su questo dispositivo. Nessuna sincronizzazione.","listTitle":"La checklist","searchPlaceholder":"Cerca nella lista…","searchAria":"Cerca oggetti","filterAria":"Filtra la checklist","all":"Tutti","todo":"Da preparare","done":"Pronti","holdIntro":"Tieni premuto il","holdEmphasis":"quadratino per 0,7 secondi","holdOutro":"per spuntare o deselezionare.","addItem":"Aggiungi oggetto","editingEyebrow":"PERSONALIZZA LA LISTA","addItemTitle":"Aggiungi oggetto","editItemTitle":"Modifica oggetto","itemNameLabel":"Oggetto","itemNamePlaceholder":"Es. Occhiali da sole","itemCategoryLabel":"Categoria","itemNoteLabel":"Nota","optional":"(facoltativa)","itemNotePlaceholder":"Dettagli utili…","delete":"Elimina","save":"Salva","close":"Chiudi","quickInstructions":"ISTRUZIONI RAPIDE","helpTitle":"Come funziona","helpPress":"Tieni premuto il quadratino per 0,7 secondi per segnare un oggetto pronto o riportarlo da preparare. Un tocco breve non cambia la spunta.","helpLanguage":"Puoi passare da IT a DE quando vuoi: le spunte e gli oggetti non cambiano. Gli oggetti aggiunti o i testi personalizzati rimangono nella lingua in cui li hai scritti.","helpPersonal":"Questa versione è riservata a {name}: il nome resta fisso quando cambi lingua.","helpEdit":"Usa + per aggiungere oggetti e la matita per modificarli o eliminarli. Questa versione ha una memoria separata per ogni persona.","helpStorage":"I dati vengono salvati in questo browser. Non ci sono account, sincronizzazione tra telefoni o backup. Cancellando i dati del browser potresti perdere le modifiche.","understood":"Ho capito","storageNotice":"Attenzione: il browser non permette di salvare i dati. Le modifiche potrebbero scomparire quando chiudi la pagina.","unreadable":"I dati salvati non sono leggibili. È mostrata la lista iniziale: non cancellare i dati del browser prima di aver chiarito il problema.","itemSingular":"elemento","itemPlural":"elementi","checkAria":"Segna pronto","uncheckAria":"Deseleziona","holdAria":"tieni premuto 0,7 secondi (oppure premi Invio o Spazio)","holdTitle":"Tieni premuto 0,7 secondi","editAria":"Modifica","editTitle":"Modifica oggetto","noResults":"Nessun oggetto trovato","noResultsHelp":"Modifica la ricerca o il filtro, oppure aggiungi un oggetto alla lista.","toastedDone":"✓ Segnato pronto","toastedTodo":"↩ Torna da preparare","toastedUpdated":"Oggetto aggiornato","toastedAdded":"Oggetto aggiunto","toastedDeleted":"Oggetto eliminato","deleteConfirm":"Eliminare “{name}” dalla lista di questo dispositivo?","footerVersion":"v1.0 · Offline"},"de":{"helpAria":"So funktioniert die App","helpTitleAttr":"So funktioniert’s","languageAria":"Sprache der App","ownerWithName":"Packliste Students","quantityLabel":"Empfohlene Menge","quantityPlaceholder":"Z. B. 7–8 Stück oder 1 Paar","weightHeading":"Gepäckplanung · Koffer-Eigengewicht mitzählen","weightConfirmed":"Aufgabegepäck 20 kg · Ziel 17–18 kg. Handgepäck 8 kg (nach vorliegenden Flugdaten).","weightPending":"Falls 20 kg Aufgabegepäck gebucht sind: 17–18 kg anpeilen. Freigepäck vorher in deiner Buchung prüfen.","weightNote":"Mengen für 7–10 Tage plus Wäsche. Schuhe, Fleece und Kleidung bei Aktivitäten nicht doppelt rechnen. Powerbank ins Handgepäck.","weightIrene":"2 Monate Aufenthalt · wöchentlich waschen. Kleidung für 7–10 Tage einplanen; Klinikbekleidung nach Vorgaben der Abteilung wechseln.","helpQuantities":"Die ockerfarbenen Angaben sind Richtwerte, über den Stift änderbar. Mehrfach aufgeführte Dinge nicht zusätzlich packen.","overviewLabel":"DEINE PACKLISTE","progressAria":"Erledigte Einträge","readyWord":"erledigt","overviewFoot":"Schritt für Schritt – dann geht’s los ✈","localNote":"Deine Häkchen bleiben auf diesem Gerät. Zentrale Ergänzungen kommen online hinzu; keine Synchronisierung zwischen Geräten.","listTitle":"Packliste","searchPlaceholder":"In der Liste suchen…","searchAria":"Einträge suchen","filterAria":"Packliste filtern","all":"Alle","todo":"Noch offen","done":"Erledigt","holdIntro":"Halte das","holdEmphasis":"Kästchen 0,7 Sekunden gedrückt","holdOutro":"um einen Eintrag abzuhaken oder zurückzusetzen.","addItem":"Eintrag hinzufügen","editingEyebrow":"LISTE ANPASSEN","addItemTitle":"Eintrag hinzufügen","editItemTitle":"Eintrag bearbeiten","itemNameLabel":"Eintrag","itemNamePlaceholder":"Z. B. Sonnenbrille","itemCategoryLabel":"Kategorie","itemNoteLabel":"Notiz","optional":"(optional)","itemNotePlaceholder":"Nützliche Details…","delete":"Löschen","save":"Speichern","close":"Schließen","quickInstructions":"KURZANLEITUNG","helpTitle":"So funktioniert’s","helpPress":"Halte das Kästchen 0,7 Sekunden gedrückt, um einen Eintrag abzuhaken oder zurückzusetzen. Ein kurzes Tippen ändert nichts.","helpLanguage":"Diese Students-Ausgabe ist auf Deutsch. Neue zentrale Einträge werden beim Online-Neuladen ergänzt, deine Häkchen bleiben erhalten.","helpPersonal":"Students hat einen eigenen Speicher, getrennt von den vier persönlichen Packlisten.","helpEdit":"Mit + kannst du Einträge hinzufügen; mit dem Stift bearbeiten oder löschen. Jede Personenversion speichert separat.","helpStorage":"Die Daten werden in diesem Browser gespeichert. Es gibt kein Konto, keinen Abgleich zwischen Geräten und kein Backup. Wenn du Browserdaten löschst, können Änderungen verloren gehen.","understood":"Verstanden","storageNotice":"Achtung: Der Browser kann die Daten nicht speichern. Deine Änderungen könnten beim Schließen der Seite verloren gehen.","unreadable":"Die gespeicherten Daten konnten nicht gelesen werden. Die ursprüngliche Liste wird angezeigt. Bitte lösche keine Browserdaten, bevor das Problem geklärt ist.","itemSingular":"Eintrag","itemPlural":"Einträge","checkAria":"Abhaken","uncheckAria":"Haken entfernen","holdAria":"0,7 Sekunden gedrückt halten (oder Eingabe/Leertaste drücken)","holdTitle":"0,7 Sekunden gedrückt halten","editAria":"Bearbeiten","editTitle":"Eintrag bearbeiten","noResults":"Keine Einträge gefunden","noResultsHelp":"Passe die Suche oder den Filter an oder füge einen neuen Eintrag hinzu.","toastedDone":"✓ Abgehakt","toastedTodo":"↩ Wieder offen","toastedUpdated":"Eintrag aktualisiert","toastedAdded":"Eintrag hinzugefügt","toastedDeleted":"Eintrag gelöscht","deleteConfirm":"„{name}“ aus der Liste auf diesem Gerät löschen?","footerVersion":"Students 1.0.0 · Offline"}},"categories":{"documenti":{"name":"Dokumente & Buchungen","description":"Vor der Abreise"},"bagaglio-mano":{"name":"Handgepäck","description":"Immer griffbereit"},"abbigliamento":{"name":"Kleidung","description":"Für den Koffer"},"salute":{"name":"Gesundheit & Hygiene","description":"Reiseapotheke & Körperpflege"},"elettronica":{"name":"Elektronik","description":"Kabel & Geräte"},"outdoor":{"name":"Wandern & Berge","description":"Tageswanderungen, Wind und wechselndes Wetter"},"mare":{"name":"Strand & Meer","description":"Baden und freie Tage am Meer"},"tygerberg":{"name":"Klinikpraktikum · Tygerberg","description":"Für Irene: Kittel / Scrubs mit der Abteilung abklären"},"ultimi":{"name":"Letzte Checks","description":"Kurz vor dem Aufbruch"}},"items":{"documenti-01":{"name":"Reisepass","note":"Gültigkeit und freie Seiten prüfen"},"documenti-02":{"name":"Flugtickets und Bordkarten","note":"Kopie offline verfügbar halten"},"documenti-03":{"name":"Reiseversicherung","note":"Versicherungsnummer und Notfallkontakt"},"documenti-04":{"name":"Unterkunftsbuchungen","note":"Adressen und Bestätigungen auch offline"},"documenti-05":{"name":"Zahlungskarte","note":"Freischaltung für das Ausland prüfen"},"documenti-06":{"name":"Ersatz-Zahlungskarte","note":"Getrennt von der Hauptkarte aufbewahren"},"documenti-07":{"name":"Bargeld für die ersten Ausgaben","note":"Ein kleiner Betrag, falls sinnvoll"},"documenti-08":{"name":"Dokumentenkopien","note":"Auf dem Handy und getrennt von den Originalen"},"documenti-09":{"name":"Führerschein","note":"Nur, wer selbst fahren wird"},"documenti-10":{"name":"Internationaler Führerschein","note":"Prüfen, ob für den Mietwagen nötig"},"documenti-11":{"name":"Notfallkontakte","note":"Wichtige Nummern offline speichern"},"documenti-12":{"name":"Unterlagen und Bestätigungen fürs Praktikum","note":"Nur falls erforderlich"},"bagaglio-mano-01":{"name":"Geldbörse und Originaldokumente","note":"Nicht ins aufgegebene Gepäck"},"bagaglio-mano-02":{"name":"Wichtige Medikamente","note":"Ggf. mit ärztlicher Verordnung"},"bagaglio-mano-03":{"name":"Ersatzbrille oder Kontaktlinsen","note":"Falls benötigt"},"bagaglio-mano-04":{"name":"Leichte Wechselkleidung","note":"Falls das Gepäck verspätet ankommt"},"bagaglio-mano-05":{"name":"Pullover für den Flug","note":"Kabine und Umstiege können kühl sein"},"bagaglio-mano-06":{"name":"Leere wiederverwendbare Trinkflasche","note":"Nach der Sicherheitskontrolle auffüllen"},"bagaglio-mano-07":{"name":"Reisesnacks","note":"Flughafenbestimmungen beachten"},"bagaglio-mano-08":{"name":"Nackenkissen und Schlafmaske","note":"Optional"},"bagaglio-mano-09":{"name":"Feuchttücher oder Taschentücher","note":""},"abbigliamento-01":{"name":"T-Shirts","note":""},"abbigliamento-02":{"name":"Lange Hosen","note":""},"abbigliamento-03":{"name":"Kurze Hosen","note":""},"abbigliamento-04":{"name":"Unterwäsche","note":""},"abbigliamento-05":{"name":"Socken","note":""},"abbigliamento-06":{"name":"Schlafanzug","note":""},"abbigliamento-07":{"name":"Sweatshirt oder Pullover","note":"Für den Abend"},"abbigliamento-08":{"name":"Wind- oder Regenjacke","note":""},"abbigliamento-09":{"name":"Bequeme Laufschuhe","note":""},"abbigliamento-10":{"name":"Leichte Ersatzschuhe","note":""},"abbigliamento-11":{"name":"Sandalen / Flip-Flops","note":"Dasselbe Paar wie unter Strand & Meer"},"abbigliamento-12":{"name":"Kleidung für den Abend","note":""},"abbigliamento-13":{"name":"Hut oder Mütze","note":""},"abbigliamento-14":{"name":"Sonnenbrille","note":""},"abbigliamento-15":{"name":"Wäschebeutel","note":""},"abbigliamento-16":{"name":"Langarmshirts oder leichte Hemden","note":"2 leichte Teile zum Schichten"},"abbigliamento-17":{"name":"Leichter Buff / Schlauchschal","note":"Für Wind, Boot und Safari"},"salute-01":{"name":"Persönliche Medikamente","note":"Ausreichend für die gesamte Reise"},"salute-02":{"name":"Ärztliche Verordnungen für Medikamente","note":"Wenn erforderlich"},"salute-03":{"name":"Kleine Reiseapotheke","note":"Nach individuellem Bedarf"},"salute-04":{"name":"Pflaster und kleines Verbandmaterial","note":""},"salute-05":{"name":"Sonnencreme mit hohem Lichtschutzfaktor","note":""},"salute-06":{"name":"Insektenschutzmittel","note":""},"salute-07":{"name":"Zahnbürste und Zahnpasta","note":""},"salute-08":{"name":"Deodorant","note":""},"salute-09":{"name":"Shampoo und Duschgel","note":"Flüssigkeitsregeln fürs Handgepäck beachten"},"salute-10":{"name":"Rasierer und Zubehör","note":""},"salute-11":{"name":"Hygieneartikel nach Bedarf","note":"Falls benötigt"},"salute-12":{"name":"Kontaktlinsen und Pflegemittel","note":"Falls benötigt"},"salute-13":{"name":"Handdesinfektionsmittel","note":""},"elettronica-01":{"name":"Smartphone","note":""},"elettronica-02":{"name":"Handyladegerät","note":""},"elettronica-03":{"name":"USB-C- oder Lightning-Kabel","note":"Passend für deine Geräte"},"elettronica-04":{"name":"Südafrika-Steckdosenadapter — Typ M","note":"WICHTIG: mindestens 1 pro Person. Typ M = 3 dicke Rundstifte; viele Universaladapter unterstützen ihn nicht. Auch Typ-N-Dosen vorhanden. 230 V / 50 Hz."},"elettronica-05":{"name":"Powerbank","note":"Ins Handgepäck; Vorgaben der Airline prüfen"},"elettronica-06":{"name":"Kopfhörer","note":""},"elettronica-07":{"name":"Tablet oder Laptop","note":"Falls benötigt"},"elettronica-08":{"name":"Ladegerät für Tablet oder Laptop","note":"Falls mitgenommen"},"elettronica-09":{"name":"Zusätzliche Kabel und Adapter","note":""},"elettronica-10":{"name":"Offline-Karten und gespeicherte Buchungen","note":""},"outdoor-01":{"name":"Kleiner Rucksack für Ausflüge","note":""},"outdoor-02":{"name":"Geeignete Wanderschuhe","note":""},"outdoor-03":{"name":"Trinkflasche","note":""},"outdoor-04":{"name":"Fernglas","note":"Optional für Safaris"},"outdoor-05":{"name":"Sonnenschutz fürs Gesicht","note":""},"outdoor-06":{"name":"Warme Schicht für die Morgensafari","note":""},"outdoor-07":{"name":"Bequeme Hose zum Wandern","note":""},"outdoor-08":{"name":"Kleine Taschenlampe","note":"Optional"},"mare-01":{"name":"Bikini / Badeanzug / Badehose","note":"Nach persönlicher Vorliebe"},"mare-02":{"name":"Mikrofaserhandtuch","note":"Schnelltrocknend, für Strand und Reisen"},"mare-03":{"name":"Flip-Flops","note":"Auch für Gemeinschaftsduschen; nicht doppelt packen"},"mare-04":{"name":"Strandtasche","note":""},"mare-05":{"name":"Wasserdichte Hülle","note":"Optional"},"mare-06":{"name":"Leichte Kleidung für heiße Tage","note":""},"tygerberg-01":{"name":"Weißer Kittel, falls vorgeschrieben","note":"Vorgaben der jeweiligen Abteilung prüfen"},"tygerberg-02":{"name":"Geschlossene, bequeme Klinikschuhe","note":"Möglichst leicht zu reinigen"},"tygerberg-03":{"name":"Zusage und Unterlagen für den Klinikausweis","note":"Bei Tygerberg International nachfragen"},"tygerberg-04":{"name":"Stift und kleines Notizbuch","note":"Keine identifizierenden Patientendaten notieren"},"tygerberg-05":{"name":"Scrubs / Klinikbekleidung, falls benötigt","note":"In vielen Abteilungen üblich; vorher nachfragen"},"tygerberg-06":{"name":"Eigenes Stethoskop, falls benötigt","note":"Benötigte Ausrüstung bei der Abteilung prüfen"},"ultimi-01":{"name":"Gepäckgewicht prüfen","note":"Freigepäck laut Ticket beachten"},"ultimi-02":{"name":"Geräte und Powerbank laden","note":""},"ultimi-03":{"name":"Dokumente für Offline-Nutzung herunterladen","note":""},"ultimi-04":{"name":"Flugzeit noch einmal prüfen","note":""},"ultimi-05":{"name":"Tür, Fenster und Hausschlüssel prüfen","note":""},"ultimi-06":{"name":"Netzteile und Ladegeräte überprüfen","note":""},"ultimi-07":{"name":"Fahrt zum Flughafen prüfen","note":""},"students-foehn":{"name":"Kleiner Föhn","note":"Vorher prüfen, ob die Unterkunft einen bereitstellt"},"students-sport":{"name":"Sportkleidung","note":"Für Sport und Wanderungen; wöchentlich waschen"},"students-locks":{"name":"Vorhängeschlösser","note":"Für Schließfächer und Unterkunft"},"students-jute":{"name":"Jutebeutel","note":"Für Einkäufe, Campus und Ausflüge"},"students-campus-id":{"name":"Studierendenausweis und Zulassung","note":"Auch offline speichern"},"students-study":{"name":"Schreibmaterial und Lernunterlagen","note":"Digitale Unterlagen offline bereithalten"},"students-laundry":{"name":"Waschmittel und Wäschebeutel","note":"Wöchentlich waschen; Waschmittel vor Ort nachkaufen"},"students-kasacks":{"name":"Kasacks und passende Klinikhosen","note":"Anzahl und Farbe mit der Abteilung abstimmen; häufiger waschen, falls erforderlich"},"students-tourniquet":{"name":"Tourniquet / Stauschlauch","note":"Nur entsprechend Ausbildung und Vorgaben der Klinik"},"students-clinic-shoes":{"name":"Geschlossene, gut zu reinigende Klinikschuhe","note":"Nur für den Klinikalltag"},"students-stethoscope":{"name":"Stethoskop","note":"Ausstattung mit der Abteilung abstimmen"},"students-clinic-docs":{"name":"Praktikumszusage und Unterlagen für den Klinik-Ausweis","note":"Anforderungen vorab mit der Klinik klären"},"students-clinic-notes":{"name":"Stift und kleiner Notizblock","note":"Keine identifizierenden Patientendaten notieren"},"students-kittel":{"name":"Weißer Kittel","note":"Nur falls von der Abteilung verlangt"}}};</script>
+<script>window.PACKLISTE_QUANTITIES = {"items":{"bagaglio-mano-02":{"it":"per il viaggio + riserva","de":"für die Reise + Reserve"},"bagaglio-mano-03":{"it":"1, se necessario","de":"1, falls benötigt"},"bagaglio-mano-04":{"it":"1 cambio, già incluso nel totale","de":"1 Wechselset, bereits mitgezählt"},"bagaglio-mano-05":{"it":"1, già incluso","de":"1, bereits mitgezählt"},"bagaglio-mano-06":{"it":"1 bottiglia vuota","de":"1 leere Flasche"},"bagaglio-mano-07":{"it":"1–2 snack","de":"1–2 Snacks"},"abbigliamento-01":{"it":"7–8 capi","de":"7–8 Stück"},"abbigliamento-02":{"it":"2–3 pantaloni","de":"2–3 Hosen"},"abbigliamento-03":{"it":"1–2 pantaloncini","de":"1–2 Shorts"},"abbigliamento-04":{"it":"8–10 capi","de":"8–10 Stück"},"abbigliamento-05":{"it":"8–10 paia","de":"8–10 Paar"},"abbigliamento-06":{"it":"1 completo","de":"1 Set"},"abbigliamento-07":{"it":"1–2 capi","de":"1–2 Stück"},"abbigliamento-08":{"it":"1","de":"1"},"abbigliamento-09":{"it":"1 paio · indossato","de":"1 Paar · anziehen"},"abbigliamento-10":{"it":"1 paio","de":"1 Paar"},"abbigliamento-11":{"de":"1 Paar insgesamt"},"abbigliamento-12":{"it":"1–2 outfit · riutilizzando capi","de":"1–2 Outfits · kombiniert"},"abbigliamento-13":{"it":"1","de":"1"},"abbigliamento-14":{"it":"1","de":"1"},"abbigliamento-15":{"it":"1","de":"1"},"abbigliamento-16":{"it":"2 capi","de":"2 Stück"},"abbigliamento-17":{"it":"1","de":"1"},"salute-01":{"it":"durata + 3–5 giorni","de":"Reisedauer + 3–5 Tage"},"salute-03":{"it":"1 set piccolo","de":"1 kleines Set"},"salute-04":{"it":"1 kit","de":"1 Set"},"salute-05":{"it":"1 SPF 50 · formato viaggio","de":"1× LSF 50 · Reisegröße"},"salute-06":{"it":"1 piccolo","de":"1 klein"},"salute-07":{"it":"1 set","de":"1 Set"},"salute-08":{"it":"1 formato viaggio","de":"1 Reisegröße"},"salute-09":{"it":"1–2 piccoli","de":"1–2 klein"},"salute-10":{"it":"1 set, se necessario","de":"1 Set, falls nötig"},"salute-11":{"it":"quanto serve","de":"nach Bedarf"},"salute-12":{"it":"quanto serve","de":"nach Bedarf"},"salute-13":{"it":"1 piccolo","de":"1 klein"},"elettronica-01":{"it":"1","de":"1"},"elettronica-02":{"it":"1","de":"1"},"elettronica-03":{"it":"1–2 cavi","de":"1–2 Kabel"},"elettronica-04":{"it":"almeno 1 per persona","de":"mind. 1 pro Person"},"elettronica-05":{"it":"1 · in cabina","de":"1 · Handgepäck"},"elettronica-06":{"it":"1","de":"1"},"elettronica-07":{"it":"0–1 · opz.","de":"0–1 · optional"},"elettronica-08":{"it":"0–1 · se portato","de":"0–1 · falls mitgenommen"},"elettronica-09":{"it":"1 kit piccolo","de":"1 kleines Set"},"outdoor-01":{"it":"1, leggero","de":"1, leicht"},"outdoor-02":{"it":"stesso paio già elencato","de":"wie oben, kein zweites Paar"},"outdoor-03":{"it":"1 (0,75–1 l)","de":"1 (0,75–1 l)"},"outdoor-04":{"it":"opz. · 1 per coppia","de":"optional · 1 pro Paar"},"outdoor-05":{"it":"stessa SPF già elencata","de":"derselbe Sonnenschutz"},"outdoor-06":{"it":"stesso pile già elencato","de":"dasselbe Fleece"},"outdoor-07":{"it":"stessi pantaloni già elencati","de":"dieselbe Hose wie oben"},"outdoor-08":{"it":"opz. · 1 per gruppo","de":"optional · 1 pro Gruppe"},"mare-01":{"de":"2"},"mare-02":{"de":"1–2"},"mare-03":{"de":"1 Paar"},"mare-04":{"it":"1 borsa leggera","de":"1 leichte Tasche"},"mare-05":{"it":"0–1 · opz.","de":"0–1 · optional"},"mare-06":{"it":"stessi capi già elencati","de":"dieselben leichten Sachen"},"run-renosterveld-01":{"it":"1 paio · riutilizzabile","de":"1 Paar · mehrfach nutzbar"},"run-renosterveld-02":{"it":"1 completo","de":"1 Set"},"run-renosterveld-03":{"it":"1 cambio · dal totale","de":"1 Wechselset · aus obiger Menge"},"tygerberg-01":{"it":"0–1 · se richiesto","de":"0–1 · falls verlangt"},"tygerberg-02":{"it":"1 paio · se necessario","de":"1 Paar · falls nötig"},"tygerberg-03":{"it":"1 set documenti","de":"1 Satz Unterlagen"},"tygerberg-04":{"it":"1 penna + 1 blocco","de":"1 Stift + 1 Block"},"tygerberg-05":{"it":"1–2 set · se richiesti","de":"1–2 Sets · falls verlangt"},"tygerberg-06":{"it":"1 · se previsto","de":"1 · falls nötig"},"students-foehn":{"de":"0–1"},"students-sport":{"de":"2–3 Sets"},"students-locks":{"de":"2"},"students-jute":{"de":"1"},"students-campus-id":{"de":"1 Satz"},"students-study":{"de":"1 Set"},"students-laundry":{"de":"1 kleiner Vorrat"},"students-kasacks":{"de":"3–5 Sets als Richtwert"},"students-tourniquet":{"de":"1, falls benötigt"},"students-clinic-shoes":{"de":"1 Paar"},"students-stethoscope":{"de":"1, falls benötigt"},"students-clinic-docs":{"de":"1 Satz"},"students-clinic-notes":{"de":"1 Set"},"students-kittel":{"de":"0–1"}},"byPerson":{"students":{"abbigliamento-01":{"it":"7 capi · bucato settimanale","de":"7 Stück · wöchentlich waschen"},"abbigliamento-02":{"it":"2 pantaloni","de":"2 Hosen"},"abbigliamento-03":{"it":"2–3 pantaloncini","de":"2–3 Shorts"},"abbigliamento-07":{"it":"1–2 capi","de":"1–2 Stück"}}}};</script>
+<script>/* Packliste Sudafrica 2026 v0.5 — quattro edizioni a nome fisso; un solo motore. */
+(() => {
+  'use strict';
+  const core = window.PACKLISTE_SEED;
+  const translations = window.PACKLISTE_I18N;
+  const person = window.PACKLISTE_PROFILE;
+  const quantities = window.PACKLISTE_QUANTITIES || {items:{},byPerson:{}};
+  if (!core || !translations?.ui || !person?.id || !Array.isArray(core.items)) {
+    document.body.insertAdjacentHTML('beforeend', '<p role="alert">Impossibile aprire la Packliste: mancano i dati del modello.</p>');
+    return;
+  }
+
+  const seed = {
+    categories: core.categories.slice(0,-1).concat(person.extraCategories || [],core.categories.slice(-1)),
+    items: core.items.concat((person.extras || []).map(extra => ({
+      id: extra.id, category: extra.category, name: extra.name, note: extra.note || ''
+    }))),
+  };
+  for (const extra of (person.extras || [])) {
+    translations.items[extra.id] = {name: extra.deName, note: extra.deNote};
+  }
+  // Manteniamo la chiave v4 per aggiornare senza perdere spunte o modifiche.
+  const STORAGE_KEY = `packliste_sudafrica_2026_v4_${person.id}`;
+  const LANGUAGE_KEY = `packliste_sudafrica_2026_lang_${person.id}`;
+  const OLD_STATE_KEY = 'packliste_sudafrica_2026_v2';
+  const OLD_OWNER_KEY = 'packliste_sudafrica_2026_owner_name';
+  const PRESS_MS = 700;
+  const byId = id => document.getElementById(id);
+  const validCategories = new Set(seed.categories.map(c => c.id));
+  const canonical = new Map(seed.items.map(item => [item.id, item]));
+  const canonicalIds = seed.items.map(item => item.id);
+  const dom = {
+    overallDone: byId('overallDone'), overallTotal: byId('overallTotal'),
+    overallPercent: byId('overallPercent'), overallMeter: byId('overallMeter'),
+    overallMeterFill: byId('overallMeterFill'), visibleCount: byId('visibleCount'),
+    searchInput: byId('searchInput'), filterRow: byId('filterRow'),
+    categoryList: byId('categoryList'), languageSwitch: byId('languageSwitch'),
+    ownerNameText: byId('ownerNameText'),
+    itemDialog: byId('itemDialog'), itemForm: byId('itemForm'),
+    itemDialogTitle: byId('itemDialogTitle'), itemName: byId('itemName'),
+    itemCategory: byId('itemCategory'), itemNote: byId('itemNote'),
+    deleteItemButton: byId('deleteItemButton'), helpDialog: byId('helpDialog'),
+    toast: byId('toast'), storageNotice: byId('storageNotice'),
+    itemQuantity: byId('itemQuantity'),
+  };
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const normalizeText = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase();
+  const makeItem = item => ({
+    id: item.id, category: item.category, name: item.name, note: item.note || '',
+    checked: false, nameOverride: null, noteOverride: null, quantityOverride:null,
+  });
+  const seedCopy = () => seed.items.map(makeItem);
+
+  let language = person.defaultLanguage === 'de' ? 'de' : 'it';
+  let canWrite = true;
+  try {
+    const previous = localStorage.getItem(LANGUAGE_KEY);
+    language = 'de';
+  } catch (error) { /* Si vede comunque la lista. */ }
+  const tr = key => {
+    const it = translations.ui.it[key];
+    const localized = translations.ui[language][key] || it || key;
+    return String(localized).replaceAll('{name}', person.name);
+  };
+  const categoryText = category => language === 'de' ? (translations.categories[category.id] || category) : category;
+  const seedName = (id, lang = language) => {
+    const item = canonical.get(id);
+    if (!item) return null;
+    return lang === 'de' ? (translations.items[id]?.name || item.name) : item.name;
+  };
+  const seedNote = (id, lang = language) => {
+    const item = canonical.get(id);
+    if (!item) return null;
+    if (person.personalNotes?.[id]?.[lang]) return person.personalNotes[id][lang];
+    return lang === 'de' ? (translations.items[id]?.note ?? item.note ?? '') : (item.note || '');
+  };
+  const itemName = item => item.nameOverride !== null ? item.nameOverride : (seedName(item.id) ?? item.name);
+  const itemNote = item => item.noteOverride !== null ? item.noteOverride : (seedNote(item.id) ?? item.note);
+  const defaultQuantity = (id,lang=language) => {
+    const hint=quantities.byPerson?.[person.id]?.[id] || quantities.items?.[id];
+    return hint?.[lang] || '';
+  };
+  const itemQuantity = item => item.quantityOverride !== null && item.quantityOverride !== undefined ? item.quantityOverride : defaultQuantity(item.id);
+
+  function storageError(message) {
+    if (dom.storageNotice) {
+      dom.storageNotice.textContent = message || tr('storageNotice');
+      dom.storageNotice.hidden = false;
+    }
+  }
+  function normalizeItem(input) {
+    if (!input || typeof input.id !== 'string' || !validCategories.has(input.category) || typeof input.name !== 'string') return null;
+    return {
+      id: input.id, category: input.category, name: input.name.slice(0,100),
+      note: typeof input.note === 'string' ? input.note.slice(0,240) : '',
+      checked: input.checked === true,
+      nameOverride: typeof input.nameOverride === 'string' ? input.nameOverride.slice(0,100) : null,
+      noteOverride: typeof input.noteOverride === 'string' ? input.noteOverride.slice(0,240) : null,
+      quantityOverride: typeof input.quantityOverride === 'string' ? input.quantityOverride.slice(0,44) : null,
+    };
+  }
+
+  let migratedFromOwner = false;
+  let migratedFromV4 = false;
+  function readState() {
+    try {
+      let raw = localStorage.getItem(STORAGE_KEY);
+      let previousVersion = false;
+      if (false) {
+        const previousOwner = (localStorage.getItem(OLD_OWNER_KEY) || '').trim().toLocaleLowerCase();
+        if (previousOwner && previousOwner === person.name.toLocaleLowerCase()) {
+          raw = localStorage.getItem(OLD_STATE_KEY);
+          previousVersion = Boolean(raw);
+        }
+      }
+      if (!raw) return {version:5,items:seedCopy(),knownBaseIds:canonicalIds};
+      const loaded = JSON.parse(raw);
+      if (!loaded || (![4,5].includes(loaded.version) && !(previousVersion && loaded.version === 2)) || !Array.isArray(loaded.items)) throw Error('Formato locale non valido');
+      const items = [];
+      const seen = new Set();
+      for (const input of loaded.items) {
+        const normalized = normalizeItem(input);
+        if (!normalized || seen.has(normalized.id) || normalized.id === 'documenti-12') continue;
+        items.push(normalized);
+        seen.add(normalized.id);
+      }
+      const known = new Set(previousVersion ? seed.items.filter(i => !['tygerberg-05','tygerberg-06'].includes(i.id)).map(i=>i.id) : (loaded.knownBaseIds || canonicalIds));
+      for (const original of seed.items) {
+        if (!seen.has(original.id) && !known.has(original.id)) items.push(makeItem(original));
+      }
+      migratedFromOwner = previousVersion;
+      migratedFromV4 = loaded.version === 4;
+      return {version:5,items,knownBaseIds:canonicalIds};
+    } catch (error) {
+      console.warn('Impossibile leggere i dati esistenti della Packliste', error);
+      canWrite = false; // Sicurezza: dati illeggibili non vanno sovrascritti.
+      storageError(tr('unreadable'));
+      return {version:5,items:seedCopy(),knownBaseIds:canonicalIds};
+    }
+  }
+  const state = readState();
+  let activeFilter = 'all';
+  let searchQuery = '';
+  let editingId = null;
+  let press = null;
+  let toastTimer = null;
+  const closedCategories = new Set();
+
+  function save() {
+    if (!canWrite) return false;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({version:5,items:state.items,knownBaseIds:canonicalIds}));
+      return true;
+    } catch (error) {
+      console.warn('Salvataggio locale non riuscito',error);
+      storageError(tr('storageNotice'));
+      return false;
+    }
+  }
+  const availableItems = () => state.items;
+  function progress() {
+    const available = availableItems();
+    const done = available.filter(item => item.checked).length;
+    const total = available.length;
+    return {done,total,percent: total ? Math.round(100*done/total) : 0};
+  }
+  function renderOverview() {
+    const {done,total,percent} = progress();
+    dom.overallDone.textContent = String(done);
+    dom.overallTotal.textContent = String(total);
+    dom.overallPercent.textContent = `${percent}%`;
+    dom.overallMeterFill.style.width = `${percent}%`;
+    dom.overallMeter.setAttribute('aria-valuenow',String(percent));
+  }
+  function matches(item) {
+    if (activeFilter === 'todo' && item.checked) return false;
+    if (activeFilter === 'done' && !item.checked) return false;
+    if (!searchQuery) return true;
+    const category = seed.categories.find(c => c.id === item.category);
+    const categoryLabel = category ? `${category.name} ${translations.categories[category.id]?.name || ''}` : '';
+    return normalizeText(`${itemName(item)} ${itemNote(item)} ${seedName(item.id,'it') || ''} ${seedName(item.id,'de') || ''} ${seedNote(item.id,'it') || ''} ${seedNote(item.id,'de') || ''} ${categoryLabel}`).includes(searchQuery);
+  }
+  function renderItem(item) {
+    const name = escapeHtml(itemName(item));
+    const note = itemNote(item);
+    const qty = itemQuantity(item);
+    return `<div class="item-row${item.checked?' checked':''}${item.id==='elettronica-04'?' critical-item':''}" data-item="${escapeHtml(item.id)}">
+      <button type="button" class="check-button" data-hold-check="${escapeHtml(item.id)}" aria-label="${escapeHtml(tr(item.checked?'uncheckAria':'checkAria'))} ${name}: ${escapeHtml(tr('holdAria'))}" aria-pressed="${item.checked}" title="${escapeHtml(tr('holdTitle'))}">
+        <span class="check-visual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span>
+      </button>
+      <div class="item-copy"><div class="item-name-line"><div class="item-name">${name}</div>${qty ? `<span class="item-quantity">${escapeHtml(qty)}</span>` : ''}</div>${note ? `<div class="item-note">${escapeHtml(note)}</div>`:''}</div>
+      <button type="button" class="edit-button" data-edit="${escapeHtml(item.id)}" aria-label="${escapeHtml(tr('editAria'))} ${name}" title="${escapeHtml(tr('editTitle'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg></button>
+    </div>`;
+  }
+  function renderList() {
+    const available = availableItems();
+    const selected = available.filter(matches);
+    dom.visibleCount.textContent = `${selected.length} ${tr(selected.length === 1 ? 'itemSingular' : 'itemPlural')}`;
+    const html = seed.categories.map(category => {
+      const all = available.filter(item => item.category === category.id);
+      const visible = selected.filter(item => item.category === category.id);
+      if (!visible.length) return '';
+      const done = all.filter(item => item.checked).length;
+      const collapsed = !searchQuery && closedCategories.has(category.id);
+      const copy = categoryText(category);
+      return `<section class="category${collapsed?' collapsed':''}" data-category="${escapeHtml(category.id)}">
+        <button type="button" class="category-toggle" data-toggle-category="${escapeHtml(category.id)}" aria-expanded="${!collapsed}">
+          <span class="category-emoji" aria-hidden="true">${category.icon}</span>
+          <span class="category-heading"><strong>${escapeHtml(copy.name)}</strong><small>${escapeHtml(copy.description)}</small></span>
+          <span class="category-count">${done}/${all.length}</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="category-items">${visible.map(renderItem).join('')}</div>
+      </section>`;
+    }).join('');
+    dom.categoryList.innerHTML = html || `<div class="empty-state"><div class="empty-icon">📦</div><strong>${escapeHtml(tr('noResults'))}</strong><p>${escapeHtml(tr('noResultsHelp'))}</p></div>`;
+  }
+  function render() {renderOverview();renderList();}
+  function applyLanguage() {
+    document.documentElement.lang = language;
+    for (const node of document.querySelectorAll('[data-i18n]')) node.textContent = tr(node.dataset.i18n);
+    for (const node of document.querySelectorAll('[data-i18n-placeholder]')) node.setAttribute('placeholder',tr(node.dataset.i18nPlaceholder));
+    for (const node of document.querySelectorAll('[data-i18n-aria]')) node.setAttribute('aria-label',tr(node.dataset.i18nAria));
+    for (const node of document.querySelectorAll('[data-i18n-title]')) node.setAttribute('title',tr(node.dataset.i18nTitle));
+    for (const button of dom.languageSwitch.querySelectorAll('[data-lang]')) button.setAttribute('aria-pressed',String(button.dataset.lang===language));
+    dom.ownerNameText.textContent = tr('ownerWithName');
+    const previousCategory=dom.itemCategory.value;
+    dom.itemCategory.innerHTML = seed.categories.map(category=>`<option value="${escapeHtml(category.id)}">${escapeHtml(categoryText(category).name)}</option>`).join('');
+    dom.itemCategory.value = previousCategory && [...dom.itemCategory.options].some(option=>option.value===previousCategory) ? previousCategory : 'abbigliamento';
+    dom.itemDialogTitle.textContent = tr(editingId ? 'editItemTitle':'addItemTitle');
+    if (canWrite) dom.storageNotice.textContent = tr('storageNotice');
+    render();
+  }
+  function showToast(message) {
+    clearTimeout(toastTimer);
+    dom.toast.textContent = message;
+    dom.toast.hidden = false;
+    toastTimer = setTimeout(()=>{dom.toast.hidden=true;},1900);
+  }
+  function toggleItem(id) {
+    const item = state.items.find(entry=>entry.id===id);
+    if (!item) return;
+    item.checked = !item.checked;
+    save();render();
+    if (typeof navigator.vibrate === 'function') navigator.vibrate(25);
+    showToast(tr(item.checked?'toastedDone':'toastedTodo'));
+  }
+  function cancelPress() {
+    if (!press) return;
+    clearTimeout(press.timer);
+    if (press.button.isConnected) press.button.classList.remove('pressing');
+    press = null;
+  }
+  function beginPress(event) {
+    const button = event.target.closest('[data-hold-check]');
+    if (!button || (event.pointerType==='mouse' && event.button!==0)) return;
+    cancelPress();
+    const id=button.dataset.holdCheck;
+    button.classList.add('pressing');
+    press={button,id,pointerId:event.pointerId,x:event.clientX,y:event.clientY,timer:setTimeout(()=>{
+      if (!press || press.id!==id || document.visibilityState === 'hidden') {cancelPress();return;}
+      press=null;
+      toggleItem(id);
+    },PRESS_MS)};
+  }
+  function movePress(event) {
+    if (!press || event.pointerId!==press.pointerId) return;
+    if (Math.hypot(event.clientX-press.x,event.clientY-press.y)>13) cancelPress();
+  }
+  function openEditor(id=null) {
+    editingId = id;
+    const item = id ? state.items.find(entry=>entry.id===id) : null;
+    dom.itemForm.reset();
+    dom.itemDialogTitle.textContent=tr(item?'editItemTitle':'addItemTitle');
+    dom.itemName.value=item ? itemName(item):'';
+    dom.itemCategory.value=item ? item.category:'abbigliamento';
+    dom.itemNote.value=item ? itemNote(item):'';
+    dom.itemQuantity.value=item ? itemQuantity(item):'';
+    dom.deleteItemButton.hidden=!item;
+    dom.itemDialog.showModal();dom.itemName.focus();
+  }
+  function saveEditor(event) {
+    event.preventDefault();
+    const name=dom.itemName.value.trim();
+    const category=dom.itemCategory.value;
+    const note=dom.itemNote.value.trim();
+    const quantity=dom.itemQuantity.value.trim().slice(0,44);
+    if (!name || !validCategories.has(category)) return;
+    const wasEditing=Boolean(editingId);
+    if (editingId) {
+      const item=state.items.find(entry=>entry.id===editingId);
+      if (!item) return;
+      if (canonical.has(item.id)) {
+        if (name!==itemName(item)) item.nameOverride=(name===seedName(item.id))?null:name;
+        if (note!==itemNote(item)) item.noteOverride=(note===seedNote(item.id))?null:note;
+        if (quantity!==itemQuantity(item)) item.quantityOverride=(quantity===defaultQuantity(item.id))?null:quantity;
+      } else {item.name=name;item.note=note;item.quantityOverride=quantity||null;}
+      item.category=category;
+    } else {
+      state.items.push({id:`custom-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,category,name,note,checked:false,nameOverride:null,noteOverride:null,quantityOverride:quantity||null});
+    }
+    save();dom.itemDialog.close();render();showToast(tr(wasEditing?'toastedUpdated':'toastedAdded'));
+  }
+  function deleteItem() {
+    if (!editingId) return;
+    const item=state.items.find(entry=>entry.id===editingId);
+    if (!item) return;
+    if (!confirm(tr('deleteConfirm').replace('{name}',itemName(item)))) return;
+    state.items=state.items.filter(entry=>entry.id!==editingId);
+    save();dom.itemDialog.close();render();showToast(tr('toastedDeleted'));
+  }
+
+  dom.languageSwitch.addEventListener('click', event=>{
+    const button=event.target.closest('[data-lang]');
+    if (!button || !['it','de'].includes(button.dataset.lang) || language===button.dataset.lang) return;
+    cancelPress();clearTimeout(toastTimer);dom.toast.hidden=true;
+    language=button.dataset.lang;
+    try {localStorage.setItem(LANGUAGE_KEY,language);} catch(error) {storageError(tr('storageNotice'));}
+    applyLanguage();
+  });
+  dom.filterRow.addEventListener('click',event=>{
+    const button=event.target.closest('[data-filter]');
+    if (!button) return;
+    activeFilter=button.dataset.filter;
+    for (const candidate of dom.filterRow.querySelectorAll('[data-filter]')) {
+      const active=candidate===button;
+      candidate.classList.toggle('active',active);
+      candidate.setAttribute('aria-pressed',String(active));
+    }
+    renderList();
+  });
+  dom.searchInput.addEventListener('input',()=>{searchQuery=normalizeText(dom.searchInput.value.trim());renderList();});
+  dom.categoryList.addEventListener('click',event=>{
+    const edit=event.target.closest('[data-edit]');
+    if (edit) {openEditor(edit.dataset.edit);return;}
+    const button=event.target.closest('[data-toggle-category]');
+    if (button) {
+      const id=button.dataset.toggleCategory;
+      if (closedCategories.has(id)) closedCategories.delete(id);
+      else closedCategories.add(id);
+      renderList();
+    }
+  });
+  dom.categoryList.addEventListener('pointerdown',beginPress);
+  document.addEventListener('pointermove',movePress,{passive:true});
+  document.addEventListener('pointerup',cancelPress);
+  document.addEventListener('pointercancel',cancelPress);
+  dom.categoryList.addEventListener('contextmenu',event=>{if(event.target.closest('[data-hold-check]')) event.preventDefault();});
+  dom.categoryList.addEventListener('keydown',event=>{
+    const button=event.target.closest('[data-hold-check]');
+    if (!button || event.repeat) return;
+    if (event.key==='Enter' || event.key===' ') {event.preventDefault();toggleItem(button.dataset.holdCheck);}
+  });
+  byId('addItemButton').addEventListener('click',()=>openEditor());
+  byId('helpButton').addEventListener('click',()=>dom.helpDialog.showModal());
+  dom.itemForm.addEventListener('submit',saveEditor);
+  dom.deleteItemButton.addEventListener('click',deleteItem);
+  document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click',()=>byId(button.dataset.close).close()));
+
+  // Alcune anteprime in-app Android sospendono la pagina quando cambia il focus.
+  // Ripristiniamo la vista e annulliamo gesti interrotti; senza azzerare lo stato.
+  let resumeQueued=false;
+  function repaintAfterResume() {
+    if (resumeQueued || document.visibilityState==='hidden') return;
+    resumeQueued=true;
+    requestAnimationFrame(()=>{
+      resumeQueued=false;
+      if (document.visibilityState==='hidden') return;
+      try {render();} catch(error) {console.warn('Ripristino Packliste fallito',error);}
+      const app=document.querySelector('.app');
+      if (app) {
+        void app.offsetHeight;
+        app.style.transform='translateZ(0)';
+        requestAnimationFrame(()=>{app.style.transform='';});
+      }
+    });
+  }
+  window.addEventListener('blur',cancelPress);
+  window.addEventListener('focus',repaintAfterResume);
+  window.addEventListener('pageshow',repaintAfterResume);
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='hidden') cancelPress();
+    else repaintAfterResume();
+  });
+
+  applyLanguage();
+  if (canWrite) save();
+  const release = 'students-1.0.0';
+  const updateStatus = byId('updateStatus');
+  async function checkUpdate(manual=false) {
+    try {
+      const response=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
+      if(!response.ok) throw Error('offline');
+      const remote=await response.json();
+      if(remote.version!==release) {
+        updateStatus.textContent='Neue Version verfügbar. Mit „Online aktualisieren“ laden; deine Häkchen bleiben erhalten.';
+        if(manual && !dom.itemDialog.open) location.reload();
+      } else updateStatus.textContent='Liste aktuell · 2 Monate · wöchentliche Wäsche';
+    } catch {updateStatus.textContent='Offline oder Server nicht erreichbar · gespeicherte Liste bleibt verfügbar.';}
+  }
+  byId('updateButton').addEventListener('click',()=>checkUpdate(true));
+  window.addEventListener('online',()=>checkUpdate());
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible') checkUpdate();});
+  checkUpdate();
+  if ((migratedFromOwner || migratedFromV4) && canWrite) save(); // Importa solo dati del vecchio proprietario corrispondente.
+  if ('serviceWorker' in navigator && (location.protocol==='https:' || ['localhost','127.0.0.1'].includes(location.hostname))) {
+    window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'}).catch(error=>console.info('Offline non disponibile',error)));
+  }
+})();
+</script>
+</body>
+</html>

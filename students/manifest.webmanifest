@@ -1,0 +1,26 @@
+{
+  "name": "Packliste Südafrika 2026 – Students",
+  "short_name": "Students",
+  "description": "2 Monate · wöchentliche Wäsche",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F5D4BB",
+  "theme_color": "#9B3E2B",
+  "icons": [
+    {
+      "src": "./apple-touch-icon-v2.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "lang": "de"
+}
